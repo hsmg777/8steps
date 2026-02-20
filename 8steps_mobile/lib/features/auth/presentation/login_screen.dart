@@ -115,7 +115,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             controller: _emailCtrl,
                             keyboardType: TextInputType.emailAddress,
                             style: const TextStyle(
-                              color: Color(0xFF303030),
+                              color: Colors.white,
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
                             ),
@@ -145,7 +145,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             controller: _passwordCtrl,
                             obscureText: _obscurePassword,
                             style: const TextStyle(
-                              color: Color(0xFF303030),
+                              color: Colors.white,
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
                             ),
@@ -161,7 +161,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   _obscurePassword
                                       ? Icons.visibility_off_outlined
                                       : Icons.visibility_outlined,
-                                  color: const Color(0xFF4A4A4A),
+                                  color: Colors.white.withValues(alpha: 0.70),
                                 ),
                               ),
                             ),
@@ -242,33 +242,42 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   }) {
     return InputDecoration(
       hintText: hint,
-      hintStyle: const TextStyle(
-        color: Color(0xFF4A4A4A),
+      hintStyle: TextStyle(
+        color: Colors.white.withValues(alpha: 0.65),
         fontSize: 16,
         fontWeight: FontWeight.w500,
       ),
       filled: true,
-      fillColor: Colors.white.withValues(alpha: 0.92),
-      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+      fillColor: const Color(0xFF172131).withValues(alpha: 0.74),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 22, vertical: 19),
       suffixIcon: suffixIcon,
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(18),
-        borderSide: BorderSide.none,
+        borderRadius: BorderRadius.circular(22),
+        borderSide: BorderSide(
+          color: Colors.white.withValues(alpha: 0.20),
+          width: 1.05,
+        ),
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(18),
-        borderSide: BorderSide.none,
+        borderRadius: BorderRadius.circular(22),
+        borderSide: BorderSide(
+          color: Colors.white.withValues(alpha: 0.20),
+          width: 1.05,
+        ),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(18),
-        borderSide: const BorderSide(color: AppStyle.brandBlue, width: 1.2),
+        borderRadius: BorderRadius.circular(22),
+        borderSide: BorderSide(
+          color: AppStyle.brandBlue.withValues(alpha: 0.70),
+          width: 1.4,
+        ),
       ),
       errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(22),
         borderSide: const BorderSide(color: Color(0xFFFF8A80), width: 1),
       ),
       focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(22),
         borderSide: const BorderSide(color: Color(0xFFFF8A80), width: 1),
       ),
     );

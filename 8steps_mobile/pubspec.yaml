@@ -40,11 +40,13 @@ flutter:
     - assets/images/mainbg.jpg
     - assets/images/loginbg.jpg
     - assets/images/registerbg.jpg
-    - assets/images/loginbg.jpeg
     - assets/icons/
 
 flutter_launcher_icons:
   android: true
   ios: true
   image_path: assets/images/8steps.png
+  adaptive_icon_background: "#000000"
+  adaptive_icon_foreground: assets/images/8steps.png
+  adaptive_icon_foreground_inset: 0
   min_sdk_android: 21
