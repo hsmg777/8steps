@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../app/providers.dart';
 import '../../../core/constants/app_routes.dart';
 import '../../../core/utils/app_style.dart';
-import 'controllers/auth_controller.dart';
+import '../../../modules/auth/viewmodels/auth_view_model.dart';
 
 class OnboardingScreen extends ConsumerWidget {
   const OnboardingScreen({super.key});
@@ -21,31 +21,14 @@ class OnboardingScreen extends ConsumerWidget {
             gradient: LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
-              colors: [
-                Color(0xFF000000),
-                Color(0xFF1E1E22),
-              ],
+              colors: [Color(0xFF000000), Color(0xFF1E1E22)],
             ),
           ),
           child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Image.asset(
-                  'assets/images/logo.png',
-                  width: 150,
-                  height: 150,
-                ),
-                const SizedBox(height: 12),
-                const Text(
-                  'by Nivusoftware',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ],
+            child: Image.asset(
+              'assets/images/logo.png',
+              width: 160,
+              height: 160,
             ),
           ),
         ),
@@ -56,13 +39,8 @@ class OnboardingScreen extends ConsumerWidget {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          Image.asset(
-            'assets/images/mainbg.jpeg',
-            fit: BoxFit.cover,
-          ),
-          Container(
-            color: AppStyle.darkOverlay,
-          ),
+          Image.asset('assets/images/mainbg.jpg', fit: BoxFit.cover),
+          Container(color: AppStyle.darkOverlay),
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 24),
@@ -73,8 +51,8 @@ class OnboardingScreen extends ConsumerWidget {
                   Center(
                     child: Image.asset(
                       'assets/images/logo.png',
-                      width: 130,
-                      height: 130,
+                      width: 140,
+                      height: 140,
                     ),
                   ),
                   const Spacer(),

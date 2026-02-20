@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../app/providers.dart';
 import '../../../core/constants/app_routes.dart';
+import '../../../core/utils/app_alert.dart';
 import '../../../core/utils/app_style.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
@@ -27,7 +28,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   }
 
   Future<void> _submit() async {
-    if (!_formKey.currentState!.validate()) return;
+    if (!_formKey.currentState!.validate()) {
+      AppAlert.warning(context, 'Completa correo y contraseña válidos');
+      return;
+    }
 
     final ok = await ref
         .read(authControllerProvider.notifier)
@@ -36,14 +40,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     if (!mounted) return;
 
     if (ok) {
+      AppAlert.success(context, 'Bienvenido');
       context.go(AppRoutes.dashboard);
       return;
     }
 
     final message = ref.read(authControllerProvider).errorMessage ??
         'Credenciales inválidas';
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(message)));
+    AppAlert.error(context, message);
   }
 
   @override
@@ -54,7 +58,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          Image.asset('assets/images/loginbg.jpeg', fit: BoxFit.cover),
+          Image.asset('assets/images/loginbg.jpg', fit: BoxFit.cover),
           Container(color: AppStyle.darkOverlay),
           SafeArea(
             child: LayoutBuilder(

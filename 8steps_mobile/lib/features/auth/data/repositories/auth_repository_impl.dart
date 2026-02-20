@@ -53,6 +53,14 @@ class AuthRepositoryImpl implements AuthRepository {
         key: AuthStorageKeys.userEmail, value: session.user.email);
     await _storage.write(
         key: AuthStorageKeys.userRole, value: session.user.role);
+    await _storage.write(
+      key: AuthStorageKeys.userFirstName,
+      value: session.user.firstName,
+    );
+    await _storage.write(
+      key: AuthStorageKeys.userLastName,
+      value: session.user.lastName,
+    );
   }
 
   @override
@@ -62,6 +70,8 @@ class AuthRepositoryImpl implements AuthRepository {
     await _storage.delete(key: AuthStorageKeys.userId);
     await _storage.delete(key: AuthStorageKeys.userEmail);
     await _storage.delete(key: AuthStorageKeys.userRole);
+    await _storage.delete(key: AuthStorageKeys.userFirstName);
+    await _storage.delete(key: AuthStorageKeys.userLastName);
   }
 
   @override
@@ -73,8 +83,16 @@ class AuthRepositoryImpl implements AuthRepository {
     final id = await _storage.read(key: AuthStorageKeys.userId);
     final email = await _storage.read(key: AuthStorageKeys.userEmail);
     final role = await _storage.read(key: AuthStorageKeys.userRole);
+    final firstName = await _storage.read(key: AuthStorageKeys.userFirstName);
+    final lastName = await _storage.read(key: AuthStorageKeys.userLastName);
 
     if (id == null || email == null || role == null) return null;
-    return AppUser(id: id, email: email, role: role);
+    return AppUser(
+      id: id,
+      email: email,
+      role: role,
+      firstName: firstName,
+      lastName: lastName,
+    );
   }
 }

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../app/providers.dart';
 import '../../../core/constants/app_routes.dart';
+import '../../../core/utils/app_alert.dart';
 import '../../../core/utils/app_style.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
@@ -46,14 +47,14 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     if (!mounted) return;
 
     if (ok) {
+      AppAlert.success(context, 'Cuenta creada correctamente');
       context.go(AppRoutes.dashboard);
       return;
     }
 
     final message =
         ref.read(authControllerProvider).errorMessage ?? 'No se pudo registrar';
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(message)));
+    AppAlert.error(context, message);
   }
 
   @override
@@ -61,25 +62,31 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     final state = ref.watch(authControllerProvider);
 
     return Scaffold(
-      backgroundColor: AppStyle.registerBackground,
-      body: SafeArea(
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            return SingleChildScrollView(
-              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-              padding: EdgeInsets.fromLTRB(
-                24,
-                0,
-                24,
-                MediaQuery.of(context).viewInsets.bottom + 22,
-              ),
-              child: ConstrainedBox(
-                constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          Image.asset('assets/images/registerbg.jpg', fit: BoxFit.cover),
+          Container(color: AppStyle.darkOverlay),
+          SafeArea(
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                return SingleChildScrollView(
+                  keyboardDismissBehavior:
+                      ScrollViewKeyboardDismissBehavior.onDrag,
+                  padding: EdgeInsets.fromLTRB(
+                    24,
+                    0,
+                    24,
+                    MediaQuery.of(context).viewInsets.bottom + 22,
+                  ),
+                  child: ConstrainedBox(
+                    constraints:
+                        BoxConstraints(minHeight: constraints.maxHeight),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
                       const SizedBox(height: 72),
                       const Text(
                         'Crea tu cuenta',
@@ -326,13 +333,15 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           ),
                         ),
                       ),
-                    ],
+                        ],
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            );
-          },
-        ),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
